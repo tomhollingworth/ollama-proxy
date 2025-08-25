@@ -9,6 +9,7 @@ import (
 	"net/http/cookiejar"
 	"net/url"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -79,7 +80,7 @@ func proxyRequest(w http.ResponseWriter, r *http.Request, target *url.URL, clien
 	proxyURL.Path = r.URL.Path
 	proxyURL.RawQuery = r.URL.RawQuery
 
-	fmt.Println("Proxying to " + proxyURL.String())
+	fmt.Printf("%s Proxying to %s\n", time.Now().Format(time.RFC3339), proxyURL.String())
 
 	proxyReq, err := http.NewRequest(r.Method, proxyURL.String(), r.Body)
 	if err != nil {
