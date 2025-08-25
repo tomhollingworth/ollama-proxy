@@ -13,8 +13,27 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        goos: [windows, linux, darwin]
-        goarch: [amd64, arm, arm64]
+        include:
+          - goos: windows
+            goarch: amd64
+            cgo_enabled: 0
+            runs-on: ubuntu-latest
+          - goos: linux
+            goarch: amd64
+            cgo_enabled: 0
+            runs-on: ubuntu-latest
+          - goos: linux
+            goarch: arm
+            cgo_enabled: 0
+            runs-on: ubuntu-latest
+          - goos: linux
+            goarch: arm64
+            cgo_enabled: 0
+            runs-on: ubuntu-latest
+          - goos: darwin
+            goarch: amd64
+            cgo_enabled: 1
+            runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       
